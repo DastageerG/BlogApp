@@ -1,0 +1,17 @@
+<resources>
+    <string name="app_name">BlogApp</string>
+    <string name="welcome_to">Welcome to</string>
+    <string name="photo_blog">Photo Blog</string>
+    <string name="enter_email">Enter Email</string>
+    <string name="enter_password">Enter Password</string>
+    <string name="log_in">Log In</string>
+    <string name="don_t_have_an_account">Don\'t have An Account ?</string>
+    <string name="create_account">Create Account</string>
+    <string name="enter_name">Enter Name</string>
+    <string name="sign_up">Sign Up</string>
+    <string name="already_have_an_account">Already have an account ?</string>
+    <string name="log_out">Log Out</string>
+    <string name="search">Search</string>
+    <string name="Account_setting">Account Setting</string>
+    <string name="add_description">Add Description</string>
+</resources>
