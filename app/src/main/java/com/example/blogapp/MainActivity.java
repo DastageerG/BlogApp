@@ -4,9 +4,12 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.app.FragmentManager;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
@@ -16,8 +19,12 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Toast;
 
+import com.example.blogapp.fragments.AccountFragment;
+import com.example.blogapp.fragments.HomeFragment;
+import com.example.blogapp.fragments.NotificationsFragment;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
+import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -35,6 +42,13 @@ public class MainActivity extends AppCompatActivity
     private RecyclerView recyclerView;
     private FirebaseAuth mFirebaseAuth;
     private FirebaseFirestore firebaseFirestore;
+    private BottomNavigationView bottomNavigationView;
+    private FragmentTransaction fragmentTransaction;
+
+    ///
+    private HomeFragment homeFragment;
+    private NotificationsFragment notificationsFragment;
+    private AccountFragment accountFragment;
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
@@ -48,9 +62,44 @@ public class MainActivity extends AppCompatActivity
         firebaseFirestore = FirebaseFirestore.getInstance();
 
         buttonAddPost = findViewById(R.id.floatingActionButtonAddPost);
-        recyclerView = findViewById(R.id.recycleViewMainActivity);
-        recyclerView.setLayoutManager(new LinearLayoutManager(context));
-        recyclerView.setHasFixedSize(true);
+        bottomNavigationView = findViewById(R.id.bottomNavigationView);
+
+        homeFragment = new HomeFragment();
+        notificationsFragment = new NotificationsFragment();
+        accountFragment = new AccountFragment();
+        replaceFragment(homeFragment);
+
+
+
+        ///
+
+
+        bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener()
+        {
+            @Override
+            public boolean onNavigationItemSelected(@NonNull MenuItem item)
+            {
+                switch ((item.getItemId()))
+                {
+                    case R.id.bottomNavigationHome:
+                        replaceFragment(homeFragment);
+                        return true;
+                    case R.id.bottomNavigationNotifications:
+                        replaceFragment(notificationsFragment);
+                        return true;
+                    case R.id.bottomNavigationAccount:
+                        replaceFragment(accountFragment);
+                        return true;
+                    default:
+                        return false;
+                }
+            }
+        });
+
+        //
+      //  recyclerView = findViewById(R.id.recycleViewMainActivity);
+//        recyclerView.setLayoutManager(new LinearLayoutManager(context));
+  //      recyclerView.setHasFixedSize(true);
 
         buttonAddPost.setOnClickListener(new View.OnClickListener()
         {
@@ -121,5 +170,12 @@ public class MainActivity extends AppCompatActivity
                 }// onComplete closed
             }); // addOnCompleteListener closed
         }
+    } // onStart closed
+
+    private void replaceFragment(Fragment fragment)
+    {
+        fragmentTransaction = getSupportFragmentManager().beginTransaction();
+        fragmentTransaction.replace(R.id.main_container,fragment);
+        fragmentTransaction.commit();
     }
 } // MainActivity Class closed

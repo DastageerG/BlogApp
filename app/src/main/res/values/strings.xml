@@ -14,4 +14,7 @@
     <string name="search">Search</string>
     <string name="Account_setting">Account Setting</string>
     <string name="add_description">Add Description</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="lore_text">Generate Lorem Ipsum placeholder text for use in your graphic, print and web layouts, and discover plugins for your favorite writing, design and blogging tools.</string>
 </resources>

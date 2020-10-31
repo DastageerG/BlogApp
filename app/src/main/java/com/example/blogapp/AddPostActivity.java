@@ -216,8 +216,7 @@ public class AddPostActivity extends AppCompatActivity
     private void postBlog(final String postDescription)
     {
         progressDialog.show();
-        path = storageReference.child("Posts").child(mFirebaseAuth.getCurrentUser()
-                .getUid()).child("post_image"+ Timestamp.now().getSeconds()+".jpg");
+        path = storageReference.child("Posts").child("post_image"+ Timestamp.now().getSeconds()+".jpg");
         path.putFile(mImageUri).addOnCompleteListener(new OnCompleteListener<UploadTask.TaskSnapshot>()
         {
             @Override
@@ -254,7 +253,7 @@ public class AddPostActivity extends AppCompatActivity
                                             finish();
                                         } //
 
-                                    } // on Comlete closed
+                                    } // on Complete closed
                                 });
 
                             } // if closed
